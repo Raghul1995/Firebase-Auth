@@ -13,10 +13,23 @@ const authReducers =(state=initState, action)=>{
                 
             return {
                 ...state,
-                authError : "Login null"
+                authError : null
             }
             case "SIGNOUT_SUCCESS":
+                console.log("signOut success")
             return state
+            case "SIGNUP_SUCCESS":
+                console.log("signUp success")
+
+                return {
+                    ...state,
+                    authError : null
+                }
+                case "SIGNUP_FAILED":
+                return {
+                    ...state,
+                    authError : action.err.message
+                }
             default: 
             return  state;
     }

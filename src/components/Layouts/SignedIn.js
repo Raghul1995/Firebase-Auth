@@ -1,9 +1,10 @@
 //since this component has no states it uses funnction component
-import React from 'react';
+import React, { Profiler } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../store/action/authAction';
 function SignedIn(props) {
+	console.log(props)
 	return (
 		<ul className="right" /*floats everything to right */>
 			<li>
@@ -14,7 +15,7 @@ function SignedIn(props) {
 			</li>
 			<li>
 				<NavLink to="/" className="btn btn-floating pink lighten-1">
-					RM
+				{props.profile.initials}
 				</NavLink>
 			</li>
 		</ul>
