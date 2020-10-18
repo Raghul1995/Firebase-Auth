@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SignedIn from './SignedIn';
 import SignedOut from './SignedOut';
+import {connect} from "react-redux"
 
 function NavBar() {
 	return (
@@ -17,5 +18,11 @@ function NavBar() {
 		</nav>
 	);
 }
+const mapStateToProps =(state)=>{
+	console.log(state)
+	return{
 
-export default NavBar;
+	}
+}
+
+export default connect(mapStateToProps)(NavBar);

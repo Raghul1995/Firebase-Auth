@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import Projlist from '../Projects/Projlist'
 import Notifications from './Notifications'
 import {connect} from "react-redux"
+import {firestoreConnect} from "react-redux-firebase"
+import {compose } from 'redux';
 
 export class Dashboard extends Component {
     render() {
@@ -29,9 +31,13 @@ const {projects} = this.props
     }
 }
     const mapStateToProp =(state)=>{
+        //console.log(state)
         return{
-        projects: state.proj.elements //getting the state of projReducers "elements" stored in rootreducer as "proj"
+        projects: state.firestore.ordered.proj//getting the state of projReducers "elements" stored in rootreducer as "proj"
     }
 }
 
-export default connect(mapStateToProp)(Dashboard)
+export default compose(connect(mapStateToProp),
+firestoreConnect([
+    {collection: "proj"}
+]))(Dashboard)
