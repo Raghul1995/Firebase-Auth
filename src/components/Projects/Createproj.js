@@ -19,6 +19,7 @@ export class CreateProj extends Component {
 		e.preventDefault();
 		//console.log(this.state); //this.state keeps track of the "state"
 		this.props.creatingProject(this.state)
+		this.props.history.push("/")
 	};
 	render() {
 		const {auth} = this.props

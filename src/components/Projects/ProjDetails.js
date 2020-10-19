@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import {Redirect} from "react-router-dom"
-
+import { Redirect } from 'react-router-dom';
 function ProjDetails(props) {
 	const { Project, auth } = props; //destructured from mapStateToProps "Project"
-	if(!auth.uid) return <Redirect to="/signin"/>
+	if (!auth.uid) return <Redirect to="/signin" />;
 
 	if (Project) {
 		return (
@@ -20,7 +19,7 @@ function ProjDetails(props) {
 						<div>
 							Posted by {Project.authorLastName} {Project.authorFirstName}
 						</div>
-						<div>2nd Sep, 2am</div>
+						<div>{Project.createdAt.toDate().toDateString()}</div>
 					</div>
 				</div>
 			</div>
