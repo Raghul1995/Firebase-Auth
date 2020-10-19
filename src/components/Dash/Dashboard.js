@@ -11,7 +11,7 @@ export class Dashboard extends Component {
     render() {
        // console.log(this.props)
 
-const {projects, auth} = this.props
+const {projects, auth, notifications} = this.props //destructuring of props
 if(!auth.uid) return <Redirect to="/signin"/>
         return (
             <div className="dashboard container">
@@ -20,7 +20,7 @@ if(!auth.uid) return <Redirect to="/signin"/>
                         <Projlist projRedData={projects}/>
                     </div>
                     <div className="col s12 m5 offset-m1">
-                        <Notifications/>
+                        <Notifications  notifications= {notifications}/>
                         
                     </div>
                 </div>
@@ -35,11 +35,13 @@ if(!auth.uid) return <Redirect to="/signin"/>
         //console.log(state)
         return{
         projects: state.firestore.ordered.proj,//getting the state of projReducers "elements" stored in rootreducer as "proj"
-           auth: state.firebase.auth // we can get the authemtication status/ (uid) through this from Navbar.js
-    }
+           auth: state.firebase.auth, // we can get the authemtication status/ (uid) through this from Navbar.js
+            notifications: state.firestore.ordered.notifications // this is a array of ordered notifications which we attach to the props
+        }
 }
 
 export default compose(connect(mapStateToProp),
 firestoreConnect([
-    {collection: "proj"}
+    {collection: "proj", orderBy: ['createdAt', 'desc']},
+    {collection: "notifications", limit: 3, orderBy: ['time', 'desc']} // limit- show only certain amt of notification
 ]))(Dashboard)

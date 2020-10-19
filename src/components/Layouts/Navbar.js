@@ -12,7 +12,7 @@ function NavBar(props) {
 	return (
 		<nav className="nav-wrapper grey darken-3">
 			<div className="container">
-				<Link to="/" className="brand-logo left">Mario</Link>
+				<Link to="/" className="brand-logo left">Home</Link>
 					
 			     {links}
 
